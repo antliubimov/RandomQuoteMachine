@@ -16,21 +16,38 @@ body {
 
 .about {
   text-align: right;
-  color: #fff; }
+  color: #fff;
+  margin-bottom: 10px; }
+
+.about__head {
+  margin-bottom: 10px; }
+
+.about__paragraph {
+  margin: 0;
+  margin-bottom: 0; }
 
 .quote-box {
   background-color: #fff;
   padding: 50px;
-  border-radius: 3%; }
+  border-radius: 3%;
+  margin-bottom: 20px; }
 
 .quote-text {
   font-size: 1.75em;
   font-weight: 500; }
 
 .buttons {
-  height: 38px;
+  height: 35px;
   font-size: 0.85em;
   border-radius: 3%; }
+
+.buttons--link {
+  height: 35px;
+  width: 35px;
+  padding: 8px; }
+
+.buttons--newq {
+  float: right; }
 
 footer {
   width: 450px;
