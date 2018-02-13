@@ -49,8 +49,7 @@ body {
   font-size: 0.85em;
   border-radius: 3%; }
   .buttons:hover {
-    opacity: 0.85;
-    transform: 0.3ms; }
+    opacity: 0.85; }
 
 .buttons--link {
   margin-left: 4px;

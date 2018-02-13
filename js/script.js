@@ -5,7 +5,9 @@ $(document).ready(function () {
 
     $('.buttons--newq').on('click', myInit);
 
-
+    $.('.buttons-tweet').on('click', function () {
+        $('.buttons-tweet').attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent(data.quote + data.author));
+    })
 });
 
 function myInit() {
