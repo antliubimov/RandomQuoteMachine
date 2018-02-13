@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     $('.buttons--newq').on('click', myInit);
 
+
 });
 
 function myInit() {
@@ -38,7 +39,7 @@ function myInit() {
              color: colors[color]
          }, 500);
 
-         $('.buttons').animate({
+         $('.buttons--newq').animate({
              backgroundColor: colors[color]
          }, 500);
     });

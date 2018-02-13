@@ -48,11 +48,12 @@ body {
   height: 35px;
   font-size: 0.85em;
   border-radius: 3%; }
+  .buttons:hover {
+    opacity: 0.85;
+    transform: 0.3ms; }
 
 .buttons--link {
-  height: 35px;
-  width: 35px;
-  padding-left: 4px;
+  margin-left: 4px;
   font-size: 35px; }
 
 .buttons--newq {
