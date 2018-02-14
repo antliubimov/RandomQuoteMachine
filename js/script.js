@@ -5,9 +5,13 @@ $(document).ready(function () {
 
     $('.buttons--newq').on('click', myInit);
 
-    $.('.buttons-tweet').on('click', function () {
-        $('.buttons-tweet').attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent(data.quote + data.author));
-    })
+    $('.buttons-tumblr').on('click', function () {
+        $('.buttons-tumblr').attr('href', 'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,antl&caption='  + $('.quote-author').text() + '&content=' + $('#text').text() + '&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button') ;
+    });
+
+    $('.buttons-tweet').on('click', function () {
+        $('.buttons-tweet').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=antl&text='+ $('#text').text() + " " + $('.quote-author').text());
+    });
 });
 
 function myInit() {
