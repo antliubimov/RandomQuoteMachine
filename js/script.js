@@ -1,4 +1,4 @@
-var colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
+const colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', '#472E32', '#BDBB99', '#77B1A9', '#73A857'];
 
 $(document).ready(function () {
     myInit();
@@ -9,17 +9,17 @@ $(document).ready(function () {
         $('.buttons-tumblr').attr('href', 'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,antl&caption='  + $('.quote-author').text() + '&content=' + $('#text').text() + '&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button') ;
     });
 
-    $('.buttons-tweet').on('click', function () {
-        $('.buttons-tweet').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=antl&text='+ $('#text').text() + " " + $('.quote-author').text());
+    $('#tweet-quote').on('click', function () {
+        $('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=antl&text='+ $('#text').text() + " " + $('.quote-author').text());
     });
 });
 
 function myInit() {
 
-    var color = Math.floor(Math.random() * colors.length);
+    const color = Math.floor(Math.random() * colors.length);
 
 
-     $.get('https://random-quote-generator.herokuapp.com/api/quotes/random', function (data) {
+     $.getJSON('https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json', function (data) {
         $(".quote-text").animate({
                 opacity: 0
             }, 500,
@@ -45,7 +45,7 @@ function myInit() {
              color: colors[color]
          }, 500);
 
-         $('.buttons--newq').animate({
+         $('#new-quote').animate({
              backgroundColor: colors[color]
          }, 500);
     });
