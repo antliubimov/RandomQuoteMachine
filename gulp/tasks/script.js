@@ -5,6 +5,7 @@ const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const terser = require('gulp-terser');
+const server = require('browser-sync').create();
 
 module.exports = function script() {
   return gulp

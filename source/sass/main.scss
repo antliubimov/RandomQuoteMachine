@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Oxygen');
 
-  html {
-    width: 100%;
-    height: 100%;
-  }
+html {
+  width: 100%;
+  height: 100%;
+}
 
-  body {
-    color: #333;
-    background-color: #333;
-    font-family: 'Oxygen', sans-serif;
+body {
+  color: #333;
+  background-color: #333;
+  font-family: 'Oxygen', sans-serif;
 }
 
 .wrapper {
@@ -20,7 +20,6 @@
 }
 
 .about {
-  text-align: right;
   color: #fff;
   margin-bottom: 10px;
 }
@@ -31,7 +30,6 @@
 
 .about__paragraph {
   margin: 0;
-  margin-bottom: 0;
 }
 
 .quote-box {
@@ -41,12 +39,6 @@
   margin-bottom: 10px;
 }
 
-.quote-author {
-  margin-bottom: 20px;
-  text-align: right;
-  opacity: 1;
-}
-
 .quote-text {
   font-size: 1.5em;
   font-weight: 500;
@@ -54,7 +46,18 @@
   opacity: 1;
 }
 
-.buttons {
+.quote-author {
+  margin-bottom: 20px;
+  text-align: right;
+  opacity: 1;
+}
+
+.quote-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
   height: 35px;
   font-size: 0.85em;
   border-radius: 3%;
@@ -64,16 +67,24 @@
   }
 }
 
-.buttons--link {
-  margin-left: 4px;
-  font-size: 35px;
+.button--link {
+  text-decoration: none;
 }
 
-.buttons--newq {
-  float: right;
-  border: 0;
-  color: #fff;
-  margin-top: 4px;
+.button--link:first-child {
+  margin-right: 5px;
+}
+
+.button--link svg{
+  width: 35px;
+  height: 35px;
+}
+
+#new-quote {
+  color: #ffffff;
+  background-color: #000000;
+  border: none;
+  border-radius: 5px;
 }
 
 footer {
