@@ -1,51 +1,4 @@
-/*$(document).ready(function () {
-    myInit();
-
-    $('.buttons--newq').on('click', myInit);
-
-    $('.buttons-tumblr').on('click', function () {
-        $('.buttons-tumblr').attr('href', 'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,antl&caption='  + $('.quote-author').text() + '&content=' + $('#text').text() + '&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button') ;
-    });
-
-    $('#tweet-quote').on('click', function () {
-        $('#tweet-quote').attr('href','https://twitter.com/intent/tweet?hashtags=quotes&related=antl&text='+ $('#text').text() + " " + $('.quote-author').text());
-    });
-});
-
-function myInit() {
-    const color = Math.floor(Math.random() * colors.length);
-
-     $.getJSON('https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json', function (data) {
-        $(".quote-text").animate({
-                opacity: 0
-            }, 500,
-            function() {
-                $(this).animate({
-                    opacity: 1
-                }, 500);
-                $('#text').html(data.quote);
-            });
-
-        $(".quote-author").animate({
-                opacity: 0
-            }, 500,
-            function() {
-                $(this).animate({
-                    opacity: 1
-                }, 500);
-                $('.quote-author').html(data.author);
-        });
-
-         $('html body').animate({
-             backgroundColor: colors[color],
-             color: colors[color]
-         }, 500);
-
-         $('#new-quote').animate({
-             backgroundColor: colors[color]
-         }, 500);
-    });
-}*/
+'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
   const colors = [
@@ -62,4 +15,49 @@ document.addEventListener('DOMContentLoaded', function () {
     '#77B1A9',
     '#73A857',
   ];
+
+  const body = document.querySelector(`body`);
+  const svgs = document.querySelectorAll(`svg`);
+  const tweetBtn = document.querySelector(`.button-tweet`);
+  const tumblrBtn = document.querySelector(`.button-tumblr`);
+  const newQuoteBtn = document.querySelector(`#new-quote`);
+  const quoteText = document.querySelector(`#text`);
+  const quoteAuthor = document.querySelector(`#author`);
+
+  const randomNumber = (min, max) => {
+    return Math.round(min - 0.5 + Math.random() * (max - min + 1));
+  };
+
+  const randomColor = () => colors[randomNumber(0, colors.length - 1)];
+
+  const setColor = () => {
+    const newColor = randomColor();
+    body.style.backgroundColor = newColor;
+    [...svgs].forEach((svg) => (svg.style.fill = newColor));
+    newQuoteBtn.style.backgroundColor = newColor;
+  };
+
+  const setHref = () => {
+    tweetBtn.href = `https://twitter.com/intent/tweet?hashtags=quotes&text=${quoteText.innerText} ${quoteAuthor.innerText}`;
+    tumblrBtn.href = `https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&content=${quoteText.innerText} ${quoteAuthor.innerText}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com`;
+  };
+
+  const responseQuote = async () => {
+    const requestQuote = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
+    const response = await fetch(requestQuote);
+    const jsonData = await response.json();
+    const data = jsonData.quote;
+    quoteText.innerText = data.quoteText;
+    quoteAuthor.innerText = data.quoteAuthor;
+    setHref();
+  };
+
+  const getNewQuote = async () => {
+    setColor();
+    responseQuote();
+  };
+
+  newQuoteBtn.addEventListener(`click`, getNewQuote);
+
+  getNewQuote();
 });

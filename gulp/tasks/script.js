@@ -5,7 +5,6 @@ const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const terser = require('gulp-terser');
-const server = require('browser-sync').create();
 
 module.exports = function script() {
   return gulp
@@ -13,11 +12,6 @@ module.exports = function script() {
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(sourcemaps.init())
-    .pipe(
-      babel({
-        presets: ['@babel/env'],
-      }),
-    )
     .pipe(terser())
     .pipe(concat('main.min.js'))
     .pipe(sourcemaps.write())
