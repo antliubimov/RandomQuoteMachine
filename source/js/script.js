@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const tweetBtn = document.querySelector(`.button-tweet`);
   const tumblrBtn = document.querySelector(`.button-tumblr`);
   const newQuoteBtn = document.querySelector(`#new-quote`);
-  const quoteText = document.querySelector(`#text`);
-  const quoteAuthor = document.querySelector(`#author`);
+  const text = document.querySelector(`#text`);
+  const author = document.querySelector(`#author`);
 
   const randomNumber = (min, max) => {
     return Math.round(min - 0.5 + Math.random() * (max - min + 1));
@@ -38,23 +38,29 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const setHref = () => {
-    tweetBtn.href = `https://twitter.com/intent/tweet?hashtags=quotes&text=${quoteText.innerText} ${quoteAuthor.innerText}`;
-    tumblrBtn.href = `https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&content=${quoteText.innerText} ${quoteAuthor.innerText}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com`;
+    tweetBtn.href = `https://twitter.com/intent/tweet?hashtags=quotes&text=${text.innerText} ${author.innerText}`;
+    tumblrBtn.href = `https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&content=${text.innerText} ${author.innerText}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com`;
   };
 
   const responseQuote = async () => {
-    const requestQuote = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
-    const response = await fetch(requestQuote);
-    const jsonData = await response.json();
-    const data = jsonData.quote;
-    quoteText.innerText = data.quoteText;
-    quoteAuthor.innerText = data.quoteAuthor;
-    setHref();
+    try {
+      const requestQuote = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
+      const response = await fetch(requestQuote);
+      if (response.status === 200) {
+        return response.json();
+      }
+    } catch (e) {
+      throw new Error(e);
+    }
   };
 
   const getNewQuote = async () => {
     setColor();
-    responseQuote();
+    const data = await responseQuote();
+    const { quoteText, quoteAuthor } = data.quote;
+    text.innerText = quoteText;
+    author.innerText = quoteAuthor;
+    setHref();
   };
 
   newQuoteBtn.addEventListener(`click`, getNewQuote);
